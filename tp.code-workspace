@@ -1,0 +1,234 @@
+{
+  "folders": [
+    {
+      "name": "kernel_scheduler",
+      "path": "kernel_scheduler"
+    },
+    {
+      "name": "kernel_memory",
+      "path": "kernel_memory"
+    },
+    {
+      "name": "cpu",
+      "path": "cpu"
+    },
+    {
+      "name": "memory_stick",
+      "path": "memory_stick"
+    },
+    {
+      "name": "swap",
+      "path": "swap"
+    },
+    {
+      "name": "io",
+      "path": "io"
+    },
+    {
+      "name": "utils",
+      "path": "utils"
+    }
+  ],
+  "settings": {
+    "debug.onTaskErrors": "abort",
+    "files.associations": {
+      "*.h": "c"
+    },
+    "C_Cpp.autoAddFileAssociations": false,
+    "C_Cpp.errorSquiggles": "disabled"
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "kernel_memory: run",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder:kernel_memory}/bin/kernel_memory",
+        "args": ["km.config"],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder:kernel_memory}",
+        "environment": [],
+        "externalConsole": false,
+        "linux": {
+          "MIMode": "gdb"
+        },
+        "osx": {
+          "MIMode": "lldb"
+        },
+        "setupCommands": [
+          {
+            "text": "-enable-pretty-printing",
+            "ignoreFailures": true
+          }
+        ],
+        "preLaunchTask": "build"
+      },
+      {
+        "name": "kernel_scheduler: run",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder:kernel_scheduler}/bin/kernel_scheduler",
+        "args": ["ks.config", "PLANI_MEM.prc"],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder:kernel_scheduler}",
+        "environment": [],
+        "externalConsole": false,
+        "linux": {
+          "MIMode": "gdb"
+        },
+        "osx": {
+          "MIMode": "lldb"
+        },
+        "setupCommands": [
+          {
+            "text": "-enable-pretty-printing",
+            "ignoreFailures": true
+          }
+        ],
+        "preLaunchTask": "build"
+      },
+      {
+        "name": "cpu: run",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder:cpu}/bin/cpu",
+        "args": ["cpu.config", "1"],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder:cpu}",
+        "environment": [],
+        "externalConsole": false,
+        "linux": {
+          "MIMode": "gdb"
+        },
+        "osx": {
+          "MIMode": "lldb"
+        },
+        "setupCommands": [
+          {
+            "text": "-enable-pretty-printing",
+            "ignoreFailures": true
+          }
+        ],
+        "preLaunchTask": "build"
+      },
+      {
+        "name": "io: run",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder:io}/bin/io",
+        "args": ["io.config", "SLEEP"],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder:io}",
+        "environment": [],
+        "externalConsole": false,
+        "linux": {
+          "MIMode": "gdb"
+        },
+        "osx": {
+          "MIMode": "lldb"
+        },
+        "setupCommands": [
+          {
+            "text": "-enable-pretty-printing",
+            "ignoreFailures": true
+          }
+        ],
+        "preLaunchTask": "build"
+      },
+      {
+        "name": "memory_stick: run",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder:memory_stick}/bin/memory_stick",
+        "args": ["memory_stick.config", "16"],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder:memory_stick}",
+        "environment": [],
+        "externalConsole": false,
+        "linux": {
+          "MIMode": "gdb"
+        },
+        "osx": {
+          "MIMode": "lldb"
+        },
+        "setupCommands": [
+          {
+            "text": "-enable-pretty-printing",
+            "ignoreFailures": true
+          }
+        ],
+        "preLaunchTask": "build"
+      },
+      {
+        "name": "swap: run",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder:swap}/bin/swap",
+        "args": ["swap.config"],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder:swap}",
+        "environment": [],
+        "externalConsole": false,
+        "linux": {
+          "MIMode": "gdb"
+        },
+        "osx": {
+          "MIMode": "lldb"
+        },
+        "setupCommands": [
+          {
+            "text": "-enable-pretty-printing",
+            "ignoreFailures": true
+          }
+        ],
+        "preLaunchTask": "build"
+      }
+    ],
+    "compounds": [
+      {
+        "name": "All Modules",
+        "configurations": [
+          "kernel_memory: run",
+          "kernel_scheduler: run",
+          "memory_stick: run",
+          "cpu: run",
+          "io: run",
+          "swap: run"
+        ],
+        "preLaunchTask": "build all"
+      },
+      {
+        "name": "Kernels + Memory",
+        "configurations": [
+          "kernel_memory: run",
+          "kernel_scheduler: run",
+          "memory_stick: run"
+        ],
+        "preLaunchTask": "build all"
+      },
+      {
+        "name": "CPU + IO + Swap",
+        "configurations": [
+          "cpu: run",
+          "io: run",
+          "swap: run"
+        ],
+        "preLaunchTask": "build all"
+      }
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "build all",
+        "type": "shell",
+        "command": "make all",
+        "options": {"cwd": "${workspaceFolder:kernel_memory}/.."},
+        "group": "build",
+        "problemMatcher": []
+      }
+    ]
+  }
+}
